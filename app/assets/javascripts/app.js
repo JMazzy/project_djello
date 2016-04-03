@@ -1,12 +1,8 @@
-var djello = angular.module('djello', ['ui.router', 'restangular', 'Devise'])
-.config(function(AuthProvider) {
+var djello = angular.module('djello', ['ui.router', 'restangular', 'Devise']);
+
+djello.config(function(AuthProvider) {
     // Configure Auth service with AuthProvider
 })
-
-// .controller('myCtrl', function(Auth) {
-//         // Use your configured Auth service.
-//     });
-
 
 djello.factory('_', ['$window', function($window) {
   return $window._; // assumes underscore has already been loaded on the page

@@ -4,23 +4,30 @@ class ListsController < ApplicationController
     @lists = List.all
   end
 
-  def new
-    @board = Board.find(params[:id])
-    @list = List.new
-    respond_to do |format|
-      format.json { render json: @board.to_json }
-    end
-  end
-
   def create
-
+    @board = Board.find(params[:board_id])
+    @list = @board.lists.build( list_params )
+    respond_to do |format|
+      if @list.save
+        format.json { render json: @list.to_json }
+      else
+        format.json { render json: @list.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   def show
     @list = List.find(params[:list_id])
     @board = @list.board
-    respond_to do |format| 
+    respond_to do |format|
       format.json { render json: @list.to_json }
     end
   end
+
+  private
+
+  def list_params
+    params.require(:list).permit(:board_id, :title, :description)
+  end
+
 end

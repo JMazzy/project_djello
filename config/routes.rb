@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  
+
 
   devise_for :users,
               path: "auth",
@@ -13,9 +13,9 @@ Rails.application.routes.draw do
 
   scope :api, defaults: { format: 'json' } do
     scope :v1 do
-      resources :boards do
-        resources :lists
-      end
+      resources :boards
+      resources :lists
+      resources :cards
       resources :static_pages
     end
   end
