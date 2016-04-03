@@ -1,19 +1,36 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Project Djello</title>
+    <title>Djello</title>
     <%= stylesheet_link_tag    'application', media: 'all' %>
     <%= javascript_include_tag 'application' %>
     <%= csrf_meta_tags %>
   </head>
   <body ng-app='djello'>
 
-    
+    <!-- navbar -->
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">
+            Djello
+          </a>
+        </div>
+      </div>
+    </nav>
 
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
+    <!-- flash messages -->
+    <% if notice %>
+      <p class="notice alert alert-success"><%= notice %></p>
+    <% end %>
+    <% if alert %>
+      <p class="alert alert alert-danger"><%= alert %></p>
+    <% end %>
 
-    <%= yield %>
+    <!-- content -->
+    <div class="container-fluid">
+      <%= yield %>
+    </div>
 
   </body>
 </html>
