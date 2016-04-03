@@ -6,7 +6,9 @@ djello.controller('BoardCtrl', ['$scope', '$state', 'Restangular', 'Auth', funct
   $scope.createBoard = function() {
     Restangular.all('boards').post( { title: $scope.board.title } )
     .then( function(newBoard) {
+      newBoard.lists = [];
       $scope.boards.push(newBoard);
+      $scope.board = $scope.boards[-1];
       $state.go("djello.boards");
     });
   };
@@ -14,6 +16,7 @@ djello.controller('BoardCtrl', ['$scope', '$state', 'Restangular', 'Auth', funct
   $scope.createList = function() {
     Restangular.all('lists').post( { title: "Title...", description: "Description...", board_id: $scope.board.id } )
     .then( function(newList) {
+      newList.cards = [];
       $scope.board.lists.push(newList);
     });
   };
@@ -25,6 +28,7 @@ djello.controller('BoardCtrl', ['$scope', '$state', 'Restangular', 'Auth', funct
         if ( list.id === listID ) {
           console.log(list)
           console.log(list.cards)
+          console.log(listID, list.id)
           list.cards.push(newCard);
         }
       });
