@@ -1,4 +1,8 @@
-var djello = angular.module('djello', ['ui.router', 'restangular', 'Devise', 'xeditable']);
+var djello = angular.module('djello', [ 'ui.router',
+                                        'restangular',
+                                        'Devise',
+                                        'xeditable',
+                                        'angularModalService']);
 
 djello.config(function(AuthProvider) {
     // Configure Auth service with AuthProvider

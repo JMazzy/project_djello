@@ -1,4 +1,4 @@
-djello.controller('BoardCtrl', ['$scope', '$state', 'Restangular', 'Auth', 'BoardService', 'ListService', function($scope, $state, Restangular, Auth, BoardService, ListService) {
+djello.controller('BoardCtrl', ['$scope', '$state', 'Restangular', 'Auth', 'BoardService', 'ListService', 'ModalService', function($scope, $state, Restangular, Auth, BoardService, ListService, ModalService) {
 
   $scope.boards = BoardService.getBoardList();
   $scope.board = BoardService.getCurrentBoard();
@@ -45,4 +45,16 @@ djello.controller('BoardCtrl', ['$scope', '$state', 'Restangular', 'Auth', 'Boar
       });
     });
   };
+
+  $scope.showCardDetails = function() {
+    ModalService.showModal({
+      templateUrl: "templates/card_details.html",
+      controller: "CardCtrl"
+    }).then(function(modal) {
+
+      modal.close.then(function(result) {
+
+      });
+    });
+  }
 }])
