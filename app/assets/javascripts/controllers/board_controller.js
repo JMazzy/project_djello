@@ -1,17 +1,23 @@
-djello.controller('BoardCtrl', ['$scope', '$state', 'Restangular', 'Auth', function($scope, $state, Restangular, Auth) {
+djello.controller('BoardCtrl', ['$scope', '$state', 'Restangular', 'Auth', 'BoardService', function($scope, $state, Restangular, Auth, BoardService) {
 
-  $scope.boards = Restangular.all('boards').getList().$object;
-  $scope.board = $scope.boards[0];
+  $scope.boards = BoardService.getBoardList();
+  $scope.board = BoardService.getCurrentBoard();
+
+  $scope.newBoard = function() {
+    BoardService.newBoard();
+  }
 
   $scope.createBoard = function() {
-    Restangular.all('boards').post( { title: $scope.board.title } )
-    .then( function(newBoard) {
-      newBoard.lists = [];
-      $scope.boards.push(newBoard);
-      $scope.board = $scope.boards[-1];
-      $state.go("djello.boards");
-    });
+    BoardService.createBoard();
   };
+
+  $scope.deleteBoard = function(board) {
+    BoardService.deleteBoard();
+  };
+
+  $scope.setBoard = function(board) {
+    BoardService.setCurrentBoard(board);
+  }
 
   $scope.createList = function() {
     Restangular.all('lists').post( { title: "Title...", description: "Description...", board_id: $scope.board.id } )
@@ -26,9 +32,6 @@ djello.controller('BoardCtrl', ['$scope', '$state', 'Restangular', 'Auth', funct
     .then( function(newCard) {
       $scope.board.lists.forEach( function(list) {
         if ( list.id === listID ) {
-          console.log(list)
-          console.log(list.cards)
-          console.log(listID, list.id)
           list.cards.push(newCard);
         }
       });

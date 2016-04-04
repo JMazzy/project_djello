@@ -8,6 +8,8 @@
 //= require angular
 //= require angular-ui-router
 
+//= require xeditable
+
 //= require restangular
 
 //= require angular-devise

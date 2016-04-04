@@ -1,4 +1,4 @@
-var djello = angular.module('djello', ['ui.router', 'restangular', 'Devise']);
+var djello = angular.module('djello', ['ui.router', 'restangular', 'Devise', 'xeditable']);
 
 djello.config(function(AuthProvider) {
     // Configure Auth service with AuthProvider
@@ -15,6 +15,10 @@ djello.config( ['RestangularProvider', function(RestangularProvider) {
   RestangularProvider.setRequestSuffix('.json');
 
 }]);
+
+djello.run(function(editableOptions) {
+  editableOptions.theme = 'bs3';
+});
 
 djello.config(['$urlRouterProvider', '$stateProvider',
   function($urlRouterProvider, $stateProvider){
