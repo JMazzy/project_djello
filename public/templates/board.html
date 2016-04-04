@@ -33,10 +33,12 @@
 
     <div class="panel panel-default list">
 
-      <h3 editable-text="list.title">{{ list.title }}</h3>
-      <p editable-textarea="list.description">
+      <h3 editable-text="list.title" onaftersave="updateList(list)">{{ list.title }}</h3>
+      <p editable-textarea="list.description" onaftersave="updateList(list)">
         {{ list.description }}
       </p>
+
+      <a href="" ng-click="deleteList(list)">Delete List</a>
 
       <div class="row" ng-repeat="card in list.cards">
         <div class="col-xs-12">

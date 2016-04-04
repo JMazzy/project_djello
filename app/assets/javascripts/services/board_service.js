@@ -36,8 +36,6 @@ djello.factory('BoardService', [ 'Restangular', '$state', function(Restangular, 
     Restangular.one('boards', _boards.currentBoard.id)
     .patch( { title: _boards.currentBoard.title} )
     .then( function(updatedBoard) {
-      updatedBoard.lists = [];
-      _boards.boardList.push(updatedBoard);
       _boards.currentBoard = updatedBoard;
       $state.go("djello.boards");
     });

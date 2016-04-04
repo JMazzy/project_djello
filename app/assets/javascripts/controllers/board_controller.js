@@ -1,4 +1,4 @@
-djello.controller('BoardCtrl', ['$scope', '$state', 'Restangular', 'Auth', 'BoardService', function($scope, $state, Restangular, Auth, BoardService) {
+djello.controller('BoardCtrl', ['$scope', '$state', 'Restangular', 'Auth', 'BoardService', 'ListService', function($scope, $state, Restangular, Auth, BoardService, ListService) {
 
   $scope.boards = BoardService.getBoardList();
   $scope.board = BoardService.getCurrentBoard();
@@ -24,11 +24,15 @@ djello.controller('BoardCtrl', ['$scope', '$state', 'Restangular', 'Auth', 'Boar
   }
 
   $scope.createList = function() {
-    Restangular.all('lists').post( { title: "Title...", description: "Description...", board_id: $scope.board.id } )
-    .then( function(newList) {
-      newList.cards = [];
-      $scope.board.lists.push(newList);
-    });
+    ListService.createList();
+  };
+
+  $scope.updateList = function(list) {
+    ListService.updateList(list);
+  };
+
+  $scope.deleteList = function(list) {
+    ListService.deleteList(list);
   };
 
   $scope.createCard = function(listID) {
