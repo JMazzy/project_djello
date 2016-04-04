@@ -3,7 +3,7 @@ djello.factory('BoardService', [ 'Restangular', '$state', function(Restangular, 
 
   var _boards = {
     boardList: Restangular.all('boards').getList().$object,
-    currentBoard: null,
+    currentBoard: {title: null},
   };
 
   obj.getBoardList = function() {
@@ -28,6 +28,17 @@ djello.factory('BoardService', [ 'Restangular', '$state', function(Restangular, 
       newBoard.lists = [];
       _boards.boardList.push(newBoard);
       _boards.currentBoard = newBoard;
+      $state.go("djello.boards");
+    });
+  };
+
+  obj.updateBoard = function() {
+    Restangular.one('boards', _boards.currentBoard.id)
+    .patch( { title: _boards.currentBoard.title} )
+    .then( function(updatedBoard) {
+      updatedBoard.lists = [];
+      _boards.boardList.push(updatedBoard);
+      _boards.currentBoard = updatedBoard;
       $state.go("djello.boards");
     });
   };

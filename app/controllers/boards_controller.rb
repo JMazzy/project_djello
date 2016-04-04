@@ -26,6 +26,19 @@ class BoardsController < ApplicationController
     end
   end
 
+  def update
+    @board = Board.find(params[:id])
+    respond_to do |format|
+
+      if @board.update( board_params )
+        format.json { render json: @board.to_json() }
+      else
+        format.json { render json: @board.errors, status: :unprocessable_entity }
+      end
+
+    end
+  end
+
   def destroy
     @board = Board.find(params[:id])
     respond_to do |format|

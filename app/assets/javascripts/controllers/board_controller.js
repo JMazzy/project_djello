@@ -11,6 +11,10 @@ djello.controller('BoardCtrl', ['$scope', '$state', 'Restangular', 'Auth', 'Boar
     BoardService.createBoard();
   };
 
+  $scope.updateBoard = function() {
+    BoardService.updateBoard();
+  };
+
   $scope.deleteBoard = function(board) {
     BoardService.deleteBoard();
   };
