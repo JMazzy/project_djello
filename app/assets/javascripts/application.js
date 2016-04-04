@@ -9,6 +9,7 @@
 //= require angular-ui-router
 
 //= require xeditable
+//= require angular-modal-service
 
 //= require restangular
 
