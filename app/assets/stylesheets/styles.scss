@@ -1,18 +1,88 @@
 .panel {
   padding: 5px;
   margin-bottom: 5px;
+  box-shadow: 0px 0px 4px #999;
 }
 
 .list {
-  color: #eee;
-  background-color: #777;
+  color: #111;
+  background-color: #C9E3DA;
 }
 
-.card {
-  color: #111;
+.card-panel {
+  color: #333;
   background-color: #eee;
 }
 
 h1, h2, h3, h4, h5, h6, p {
   text-align: center;
+}
+
+.editable-click, .editable-click:visited {
+  border: none;
+  color: #555;
+}
+
+.editable-click:hover {
+  color: #444;
+  cursor: crosshair;
+}
+
+.modal-header, .modal-footer, .navbar {
+  background-color: #e2b162;
+  color: #111;
+  box-shadow: 0px 0px 4px #999;
+  border: none;
+  border-radius: 0;
+  width: 100%;
+}
+
+.navbar-default .navbar-brand {
+  color: #111;
+}
+
+.navbar-default .navbar-brand:hover {
+  color: #333;
+}
+
+.btn {
+  border: none;
+  box-shadow: 0px 0px 4px #999;
+}
+
+.btn-success, .btn-primary {
+  background-color: #64A89D;
+}
+
+.btn-success:hover, .btn-primary:hover {
+  background-color: #53978c;
+}
+
+.btn-danger {
+  background-color: #bc3a4f;
+}
+
+.btn-danger:hover {
+  background-color: #ab294e;
+}
+
+.col-centered{
+  float: none;
+  margin: 0 auto;
+}
+
+.editable-wrap {
+  width: 100%;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.editable-wrap > .editable-controls {
+  width: 100%;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.editable-controls > .editable-has-buttons.editable-input.form-control {
+  width: 80%;
 }

@@ -1,8 +1,10 @@
-djello.controller('CardCtrl', ['$scope', '$state', 'Restangular', 'Auth', 'BoardService', 'ListService', 'ModalService', 'close', function($scope, $state, Restangular, Auth, BoardService, ListService, ModalService, close) {
+djello.controller('CardCtrl', ['$scope', '$state', 'Restangular', 'Auth', 'BoardService', 'ListService', 'CardService', 'ModalService', 'close', function($scope, $state, Restangular, Auth, BoardService, ListService, CardService, ModalService, close) {
 
-  $scope.closeCardDetails = function() {
-    // close("Success!");
-    console.log("closed")
+  $scope.cardData = CardService.getCardData();
+  $scope.card = $scope.cardData.getCurrentCard();
+
+  $scope.updateCard = function() {
+    CardService.updateCard();
   }
 
 }]);

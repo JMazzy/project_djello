@@ -1,7 +1,8 @@
-djello.controller('BoardCtrl', ['$scope', '$state', 'Restangular', 'Auth', 'BoardService', 'ListService', 'ModalService', function($scope, $state, Restangular, Auth, BoardService, ListService, ModalService) {
+djello.controller('BoardCtrl', ['$scope', '$state', 'Restangular', 'Auth', 'BoardService', 'ListService', 'CardService', 'ModalService', function($scope, $state, Restangular, Auth, BoardService, ListService, CardService, ModalService) {
 
   $scope.boards = BoardService.getBoardList();
   $scope.board = BoardService.getCurrentBoard();
+  $scope.cardData = CardService.getCardData();
 
   $scope.newBoard = function() {
     BoardService.newBoard();
@@ -36,25 +37,10 @@ djello.controller('BoardCtrl', ['$scope', '$state', 'Restangular', 'Auth', 'Boar
   };
 
   $scope.createCard = function(listID) {
-    Restangular.all('cards').post( { title: "Title...", description: "Description...", list_id: listID } )
-    .then( function(newCard) {
-      $scope.board.lists.forEach( function(list) {
-        if ( list.id === listID ) {
-          list.cards.push(newCard);
-        }
-      });
-    });
+    CardService.createCard(listID)
   };
 
-  $scope.showCardDetails = function() {
-    ModalService.showModal({
-      templateUrl: "templates/card_details.html",
-      controller: "CardCtrl"
-    }).then(function(modal) {
-
-      modal.close.then(function(result) {
-
-      });
-    });
+  $scope.showCardDetails = function(card, list) {
+    CardService.showCardDetails(card, list);
   }
 }])
