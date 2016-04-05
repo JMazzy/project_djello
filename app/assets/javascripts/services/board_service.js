@@ -6,6 +6,14 @@ djello.factory('BoardService', [ 'Restangular', '$state', function(Restangular, 
     currentBoard: {title: null},
   };
 
+  obj.addMember = function(member) {
+    Restangular.all('board_memberships')
+    .post( { board_id: _boards.currentBoard.id, member_id: member.id } )
+    .then( function() {
+      console.log("membership added")
+    });
+  }
+
   obj.getBoardList = function() {
     return _boards.boardList;
   };

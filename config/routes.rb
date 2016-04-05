@@ -13,6 +13,8 @@ Rails.application.routes.draw do
 
   scope :api, defaults: { format: 'json' } do
     scope :v1 do
+      resources :users, only: [:index]
+      resources :board_memberships, only: [:create,:destroy]
       resources :boards
       resources :lists
       resources :cards

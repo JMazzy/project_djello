@@ -16,7 +16,7 @@
             <p editable-textarea="card.description" onaftersave="updateCard()">
               {{ card.description || "Add description..." }}
             </p>
-            <a href="" ng-click="deleteCard(list.id)" data-dismiss="modal" aria-label="Close">Delete Card</a>
+            <a href="" ng-click="deleteCard(list.id)" data-dismiss="modal" aria-label="Close">Mark Completed</a>
           </div>
         </div>
 
@@ -26,7 +26,19 @@
           <div class="col-xs-12">
             <h4>Members</h4>
             <div class="member-list">
+              <div class="row">
+                <div ng-repeat="member in card.members" class="col-xs-4">
+                  <div class="panel panel-default">
+                    <p>
+                      {{ member.username }}
+                    </p>
+                  </div>
+                </div>
 
+                <div class="col-xs-4">
+                  <select class="form-control" ng-options='member as member.username for member in board.members' ng-model='memberToAdd' ng-change="addMember()"></select>
+                </div>
+              </div>
             </div>
           </div>
         </div>

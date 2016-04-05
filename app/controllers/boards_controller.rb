@@ -3,7 +3,17 @@ class BoardsController < ApplicationController
   def index
     @boards = current_user.member_boards
     respond_to do |format|
-      format.json { render json: @boards.to_json(include: { lists: { include: :cards } } ) }
+      format.json { render json: @boards.to_json(
+        include: [ :members, {
+          lists: {
+            include: {
+              cards: {
+                include: [ :members, :activities ]
+              }
+            }
+          }
+        }]
+      )}
     end
   end
 
