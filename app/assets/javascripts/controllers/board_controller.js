@@ -11,6 +11,12 @@ djello.controller('BoardCtrl', ['$scope', '$state', 'Restangular', 'Auth', 'Boar
   $scope.board = BoardService.getCurrentBoard();
   $scope.cardData = CardService.getCardData();
 
+  Auth.currentUser().then(function(user) {
+    $scope.user = user;
+  }, function(error) {
+    console.log(error)
+  });
+
   $scope.newBoard = function() {
     BoardService.newBoard();
   }
@@ -52,7 +58,7 @@ djello.controller('BoardCtrl', ['$scope', '$state', 'Restangular', 'Auth', 'Boar
   };
 
   $scope.createCard = function(listID) {
-    CardService.createCard(listID)
+    CardService.createCard(listID, $scope.user)
   };
 
   $scope.showCardDetails = function(card, list) {

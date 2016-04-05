@@ -70,6 +70,27 @@ djello.factory('BoardService', [ 'Restangular', '$state', function(Restangular, 
         }
       }
     });
+  };
+
+  obj.addCardToList = function(listID, card) {
+    _boards.currentBoard.lists.forEach( function(list) {
+      if ( list.id === listID ) {
+        list.cards.push(card);
+      }
+    });
+  };
+
+  obj.removeCardFromList = function(listID, cardID) {
+    for ( var l = 0; l < _boards.currentBoard.lists.length; l++ ) {
+      if ( _boards.currentBoard.lists[l].id === listID ) {
+        for (var c = 0; c < _boards.currentBoard.lists[l].cards.length; c++) {
+          if (_boards.currentBoard.lists[l].cards[c].id === cardID) {
+            _boards.currentBoard.lists[l].cards.splice(c, 1);
+            break;
+          }
+        }
+      }
+    }
   }
 
   return obj;

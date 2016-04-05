@@ -23,8 +23,8 @@
 </div>
 
 <div class="row">
-  <div class="col-md-6">
-    <h1 class="text-center" editable-text="board.title" onaftersave="updateBoard()">{{ board.title }}</h1>
+  <div class="col-md-6 col-centered">
+    <h1 class="text-center" editable-text="board.title" onaftersave="updateBoard()">{{ board.title || "Click to add a title..." }}</h1>
   </div>
 </div>
 
@@ -33,9 +33,9 @@
 
     <div class="panel panel-default list">
 
-      <span><h3 editable-text="list.title" onaftersave="updateList(list)">{{ list.title }}</h3></span>
+      <span><h3 editable-text="list.title" onaftersave="updateList(list)">{{ list.title || "Click to add a title..." }}</h3></span>
       <p editable-textarea="list.description" onaftersave="updateList(list)">
-        {{ list.description }}
+        {{ list.description || "Click to add a description..." }}
       </p>
 
       <a href="" ng-click="deleteList(list)">Delete List</a>
@@ -44,9 +44,9 @@
         <div class="col-xs-12">
 
           <div class="panel panel-default card-panel" ng-click="showCardDetails(card, list)">
-            <h4>{{ card.title }}</h4>
+            <h4>{{ card.title || "Click to add a title..." }}</h4>
             <p>
-              {{ card.description }}
+              {{ card.description || "Click to add a description..." }}
             </p>
           </div>
 

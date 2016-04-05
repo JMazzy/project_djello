@@ -5,7 +5,9 @@ var djello = angular.module('djello', [ 'ui.router',
                                         'angularModalService']);
 
 djello.config(function(AuthProvider) {
-    // Configure Auth service with AuthProvider
+  AuthProvider.loginPath('/auth/login.json');
+  AuthProvider.loginMethod('GET');
+  AuthProvider.resourceName('user');
 })
 
 djello.factory('_', ['$window', function($window) {
@@ -20,8 +22,9 @@ djello.config( ['RestangularProvider', function(RestangularProvider) {
 
 }]);
 
-djello.run(function(editableOptions) {
+djello.run(function(editableOptions, editableThemes) {
   editableOptions.theme = 'bs3';
+  editableThemes.bs3.buttonsClass = 'btn-xs';
 });
 
 djello.config(['$urlRouterProvider', '$stateProvider',

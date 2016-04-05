@@ -7,7 +7,7 @@ class CardsController < ApplicationController
 
     respond_to do |format|
       if @card.save
-        format.json { render json: @card.to_json }
+        format.json { render json: @card.to_json( include: [:members, :activities]) }
       else
         format.json { render json: @card.errors, status: :unprocessable_entity }
       end

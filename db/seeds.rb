@@ -37,5 +37,14 @@ List.all.each do |list|
     user = list.user
 
     CardMembership.create( member_id: user.id, card_id: card.id )
+    Activity.create(
+      user_id: user.id,
+      card_id: card.id,
+      description: "#{user.username.capitalize} created this card." )
+
+    Activity.create(
+      user_id: user.id,
+      card_id: card.id,
+      description: "#{user.username.capitalize} was added as a member." )
   end
 end

@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
 
-
   devise_for :users,
               path: "auth",
               path_names: { sign_in: 'login',
@@ -20,6 +19,7 @@ Rails.application.routes.draw do
       resources :lists
       resources :cards
       resources :static_pages
+      resources :activities, only: [:create]
     end
   end
 

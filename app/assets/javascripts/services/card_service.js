@@ -1,4 +1,4 @@
-djello.factory('CardService', ['Restangular', 'BoardService', 'ListService', 'ModalService', function(Restangular, BoardService, ListService, ModalService) {
+djello.factory('CardService', ['Restangular', 'BoardService', 'ListService', 'ActivityService', function(Restangular, BoardService, ListService, ActivityService) {
   var obj = {};
 
   var _board = BoardService.getCurrentBoard();
@@ -38,15 +38,12 @@ djello.factory('CardService', ['Restangular', 'BoardService', 'ListService', 'Mo
     })
   };
 
-  obj.createCard = function(listID) {
+  obj.createCard = function(listID, user) {
     _board = BoardService.getCurrentBoard();
-    Restangular.all('cards').post( { title: "Title...", description: "Description...", list_id: listID } )
+    Restangular.all('cards').post( { title: null, description: null, list_id: listID } )
     .then( function(newCard) {
-      _board.lists.forEach( function(list) {
-        if ( list.id === listID ) {
-          list.cards.push(newCard);
-        }
-      });
+      BoardService.addCardToList(listID, newCard);
+      obj.addMember(user);
     });
   };
 
@@ -55,16 +52,7 @@ djello.factory('CardService', ['Restangular', 'BoardService', 'ListService', 'Mo
     Restangular.one('cards', _cardData.getCurrentCard().id)
     .remove()
     .then( function(deletedCard) {
-      for ( var l = 0; l < _board.lists.length; l++ ) {
-        if ( _board.lists[l].id === listID ) {
-          for (var c = 0; c < _board.lists[l].cards.length; c++) {
-            if (_board.lists[l].cards[c].id === _cardData.getCurrentCard().id) {
-              _board.lists[l].cards.splice(c, 1);
-              break;
-            }
-          }
-        }
-      }
+      BoardService.removeCardFromList(listID, deletedCard.id)
     })
   };
 
@@ -72,7 +60,9 @@ djello.factory('CardService', ['Restangular', 'BoardService', 'ListService', 'Mo
     Restangular.all('card_memberships')
     .post( { card_id: _cardData.currentCard.id, member_id: member.id } )
     .then( function(newMembership) {
-      _cardData.currentCard.members.push(newMembership.member);
+      _cardData.currentCard.members.push( newMembership.member );
+      var description = member.username + " was added as a member."
+      ActivityService.createActivity( member, _cardData.currentCard, description)
     });
   }
 
@@ -85,6 +75,8 @@ djello.factory('CardService', ['Restangular', 'BoardService', 'ListService', 'Mo
           _cardData.currentCard.members.splice(m,1);
         }
       }
+      var description = member.username + " was removed as member."
+      ActivityService.createActivity( member, _cardData.currentCard, description)
     });
   }
 
