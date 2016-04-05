@@ -7,6 +7,7 @@ djello.controller('BoardCtrl', ['$scope', '$state', 'Restangular', 'Auth', 'Boar
   $scope.memberToAdd;
 
   $scope.boards = BoardService.getBoardList();
+  BoardService.setCurrentBoard( $scope.boards[0] );
   $scope.board = BoardService.getCurrentBoard();
   $scope.cardData = CardService.getCardData();
 
@@ -33,6 +34,10 @@ djello.controller('BoardCtrl', ['$scope', '$state', 'Restangular', 'Auth', 'Boar
   $scope.addMember = function() {
     BoardService.addMember( $scope.memberToAdd );
   }
+
+  $scope.removeMember = function(member) {
+    BoardService.removeMember(member)
+  };
 
   $scope.createList = function() {
     ListService.createList();

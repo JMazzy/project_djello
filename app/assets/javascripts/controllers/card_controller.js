@@ -8,19 +8,18 @@ djello.controller('CardCtrl', ['$scope', '$state', 'Restangular', 'Auth', 'Board
 
   $scope.updateCard = function() {
     CardService.updateCard();
-  }
+  };
 
   $scope.deleteCard = function(listID) {
     CardService.deleteCard(listID);
-  }
+  };
 
   $scope.addMember = function() {
-    for ( var m = 0; m < $scope.card.members.length; m++ ) {
-      if ($scope.memberToAdd.username === $scope.card.members[m].username ) {
-        return false;
-      }
-    }
-    $scope.card.members.push($scope.memberToAdd);
-  }
+    CardService.addMember($scope.memberToAdd);
+  };
+
+  $scope.removeMember = function(member) {
+    CardService.removeMember(member)
+  };
 
 }]);

@@ -15,6 +15,7 @@ Rails.application.routes.draw do
     scope :v1 do
       resources :users, only: [:index]
       resources :board_memberships, only: [:create,:destroy]
+      resources :card_memberships, only: [:create,:destroy]
       resources :boards
       resources :lists
       resources :cards

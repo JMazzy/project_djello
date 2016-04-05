@@ -68,5 +68,25 @@ djello.factory('CardService', ['Restangular', 'BoardService', 'ListService', 'Mo
     })
   };
 
+  obj.addMember = function(member) {
+    Restangular.all('card_memberships')
+    .post( { card_id: _cardData.currentCard.id, member_id: member.id } )
+    .then( function(newMembership) {
+      _cardData.currentCard.members.push(newMembership.member);
+    });
+  }
+
+  obj.removeMember  = function(member) {
+    Restangular.one('card_memberships', member.id) // should not be member id but membership id!!!!!
+    .remove( { card_id: _cardData.currentCard.id, member_id: member.id } )
+    .then( function(membership) {
+      for ( var m = 0; m < _cardData.currentCard.members.length; m++ ) {
+        if ( _cardData.currentCard.members[m].id === membership.member.id ) {
+          _cardData.currentCard.members.splice(m,1);
+        }
+      }
+    });
+  }
+
   return obj;
 }]);

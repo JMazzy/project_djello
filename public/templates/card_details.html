@@ -27,16 +27,21 @@
             <h4>Members</h4>
             <div class="member-list">
               <div class="row">
-                <div ng-repeat="member in card.members" class="col-xs-4">
+                <div ng-repeat="member in card.members" class="col-xs-4 text-center">
                   <div class="panel panel-default">
                     <p>
                       {{ member.username }}
                     </p>
+                    <a href="" ng-click="removeMember(member)">Remove Member</a>
                   </div>
                 </div>
 
                 <div class="col-xs-4">
-                  <select class="form-control" ng-options='member as member.username for member in board.members' ng-model='memberToAdd' ng-change="addMember()"></select>
+
+                  <select class="form-control" ng-options='member as member.username for member in board.members | memberOK : card.members' ng-model='memberToAdd'></select>
+
+                  <button type="button" ng-click="addMember()" class="btn btn-primary">Add Member</button>
+
                 </div>
               </div>
             </div>

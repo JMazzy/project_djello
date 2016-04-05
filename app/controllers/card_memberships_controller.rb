@@ -1,7 +1,7 @@
-class BoardMembershipsController < ApplicationController
+class CardMembershipsController < ApplicationController
 
   def create
-    @membership = BoardMembership.new( bm_params )
+    @membership = CardMembership.new( cm_params )
     respond_to do |format|
       if @membership.save
         format.json { render json: @membership.to_json( include: :member ) }
@@ -14,8 +14,8 @@ class BoardMembershipsController < ApplicationController
 
 
   def destroy
-    @membership = BoardMembership.find_by(
-      board_id: params[:board_id],
+    @membership = CardMembership.find_by(
+      card_id: params[:card_id],
       member_id: params[:member_id])
     respond_to do |format|
       if @membership.destroy
@@ -28,9 +28,9 @@ class BoardMembershipsController < ApplicationController
 
   private
 
-  def bm_params
+  def cm_params
 
-    params.require(:board_membership).permit(:board_id, :member_id)
+    params.require(:card_membership).permit(:card_id, :member_id)
 
   end
 
