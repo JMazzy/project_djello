@@ -10,12 +10,13 @@
 
         <div class="row">
           <div class="col-xs-12 col-centered">
-            <h3 editable-text="card.title" onaftersave="updateCard(list.id)">
-              {{ card.title }}
+            <h3 editable-text="card.title" onaftersave="updateCard()">
+              {{ card.title || "Add title..." }}
             </h3>
-            <p editable-textarea="card.description" onaftersave="updateCard(list.id)">
-              {{ card.description }}
+            <p editable-textarea="card.description" onaftersave="updateCard()">
+              {{ card.description || "Add description..." }}
             </p>
+            <a href="" ng-click="deleteCard(list.id)" data-dismiss="modal" aria-label="Close">Delete Card</a>
           </div>
         </div>
 

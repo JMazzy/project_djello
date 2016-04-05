@@ -26,6 +26,18 @@ class CardsController < ApplicationController
     end
   end
 
+  def destroy
+    @card = Card.find(params[:id])
+
+    respond_to do |format|
+      if @card.destroy
+        format.json { render json: @card }
+      else
+        format.json { render json: @card.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
   private
 
   def card_params

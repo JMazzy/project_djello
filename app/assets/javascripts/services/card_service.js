@@ -14,7 +14,7 @@ djello.factory('CardService', ['Restangular', 'BoardService', 'ListService', 'Mo
       this.cardList = list;
     },
     getCardList: function() {
-      return this.cardList();
+      return this.cardList;
     },
     setCurrentCard: function(card) {
       this.currentCard = card;
@@ -33,7 +33,7 @@ djello.factory('CardService', ['Restangular', 'BoardService', 'ListService', 'Mo
     .patch({  title: _cardData.currentCard.title,
               description: _cardData.currentCard.description, })
     .then( function(updatedCard) {
-      
+
     })
   };
 
@@ -49,15 +49,23 @@ djello.factory('CardService', ['Restangular', 'BoardService', 'ListService', 'Mo
     });
   };
 
-  obj.showCardDetails = function(card, list) {
-    _cardData.setCurrentCard(card);
-    _cardData.setCardList(list);
-
-    ModalService.showModal({
-      templateUrl: "templates/card_details.html",
-      controller: "CardCtrl",
+  obj.deleteCard = function(listID) {
+    _board = BoardService.getCurrentBoard();
+    Restangular.one('cards', _cardData.getCurrentCard().id)
+    .remove()
+    .then( function(deletedCard) {
+      for ( var l = 0; l < _board.lists.length; l++ ) {
+        if ( _board.lists[l].id === listID ) {
+          for (var c = 0; c < _board.lists[l].cards.length; c++) {
+            if (_board.lists[l].cards[c].id === _cardData.getCurrentCard().id) {
+              _board.lists[l].cards.splice(c, 1);
+              break;
+            }
+          }
+        }
+      }
     })
-  }
+  };
 
   return obj;
 }]);

@@ -41,6 +41,17 @@ djello.controller('BoardCtrl', ['$scope', '$state', 'Restangular', 'Auth', 'Boar
   };
 
   $scope.showCardDetails = function(card, list) {
-    CardService.showCardDetails(card, list);
+    $scope.cardData.setCurrentCard(card);
+    $scope.cardData.setCardList(list);
+
+    ModalService.showModal({
+      templateUrl: "templates/card_details.html",
+      controller: "CardCtrl",
+    }).then( function(modal) {
+      modal.element.modal('show');
+      modal.close.then(function(result) {
+        $(".modal-backdrop").addClass("hidden");
+      });
+    });
   }
 }])
