@@ -4,15 +4,14 @@ class BoardsController < ApplicationController
     @boards = current_user.member_boards
     respond_to do |format|
       format.json { render json: @boards.to_json(
-        include: [ :members, {
+        include: [ :members,
           lists: {
             include: {
               cards: {
                 include: [ :members, :activities ]
               }
             }
-          }
-        }]
+          }]
       )}
     end
   end
