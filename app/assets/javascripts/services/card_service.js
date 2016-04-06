@@ -43,7 +43,6 @@ djello.factory('CardService', ['Restangular', 'BoardService', 'ListService', 'Ac
     Restangular.all('cards').post( { title: null, description: null, list_id: listID } )
     .then( function(newCard) {
       BoardService.addCardToList(listID, newCard);
-      obj.addMember(user);
     });
   };
 
