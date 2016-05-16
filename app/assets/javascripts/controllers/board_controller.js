@@ -14,7 +14,7 @@ djello.controller('BoardCtrl', ['$scope', '$state', 'Restangular', 'Auth', 'Boar
   Auth.currentUser().then(function(user) {
     $scope.user = user;
   }, function(error) {
-    console.log(error)
+    console.error();(error)
   });
 
   $scope.newBoard = function() {

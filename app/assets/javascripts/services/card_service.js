@@ -18,7 +18,6 @@ djello.factory('CardService', ['Restangular', 'BoardService', 'ListService', 'Ac
     },
     setCurrentCard: function(card) {
       this.currentCard = card;
-      console.log(this.currentCard)
     },
     getCurrentCard: function() {
       return this.currentCard;
