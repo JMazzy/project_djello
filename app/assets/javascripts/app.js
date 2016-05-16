@@ -22,7 +22,7 @@ djello.config( ['RestangularProvider', function(RestangularProvider) {
 
 }]);
 
-djello.run('editableOptions', 'editableThemes', [function(editableOptions, editableThemes) {
+djello.run(['editableOptions', 'editableThemes', function(editableOptions, editableThemes) {
   editableOptions.theme = 'bs3';
   editableThemes.bs3.buttonsClass = 'btn-xs';
 }]);
