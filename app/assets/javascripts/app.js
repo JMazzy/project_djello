@@ -4,7 +4,7 @@ var djello = angular.module('djello', [ 'ui.router',
                                         'xeditable',
                                         'angularModalService']);
 
-djello.config('AuthProvider', [function(AuthProvider) {
+djello.config(['AuthProvider', function(AuthProvider) {
   AuthProvider.loginPath('/auth/login.json');
   AuthProvider.loginMethod('GET');
   AuthProvider.resourceName('user');
