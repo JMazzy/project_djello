@@ -4,11 +4,11 @@ var djello = angular.module('djello', [ 'ui.router',
                                         'xeditable',
                                         'angularModalService']);
 
-djello.config(function(AuthProvider) {
+djello.config('AuthProvider', [function(AuthProvider) {
   AuthProvider.loginPath('/auth/login.json');
   AuthProvider.loginMethod('GET');
   AuthProvider.resourceName('user');
-})
+}])
 
 djello.factory('_', ['$window', function($window) {
   return $window._; // assumes underscore has already been loaded on the page
@@ -22,10 +22,10 @@ djello.config( ['RestangularProvider', function(RestangularProvider) {
 
 }]);
 
-djello.run(function(editableOptions, editableThemes) {
+djello.run('editableOptions', 'editableThemes', [function(editableOptions, editableThemes) {
   editableOptions.theme = 'bs3';
   editableThemes.bs3.buttonsClass = 'btn-xs';
-});
+}]);
 
 djello.config(['$urlRouterProvider', '$stateProvider',
   function($urlRouterProvider, $stateProvider){

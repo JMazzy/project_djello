@@ -1,8 +1,5 @@
-// A filter to keep only kittens marked "playful"
 djello.filter('memberOK', function() {
 
-  // `activatePlayfulFilter` is a boolean the user
-  //    can set in the DOM to turn on this filter
   return function( collection, otherCollection ) {
 
     var filteredCollection = []
